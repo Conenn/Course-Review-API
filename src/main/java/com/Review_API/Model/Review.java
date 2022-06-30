@@ -18,7 +18,6 @@ public class Review {
     @NotNull(message = "Course Must Be Selected")
     private String courseId;
 
-    @Column(columnDefinition="COLUMN_TYPE default '0'")
     @DecimalMax(value = "5", message = "Difficulty Can't Be Greater Than 5")
     @DecimalMin(value = "1", message = "Difficulty Can't Be Less Than 1")
     private double difficulty;

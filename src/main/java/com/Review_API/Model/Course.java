@@ -19,8 +19,6 @@ public class Course {
 
     @Digits(integer=1, fraction=2)
     private double rating;
-
-    @Column(columnDefinition="COLUMN_TYPE default '0'")
     @Digits(integer=2, fraction=2 )
     private double difficulty;
     private String type;
