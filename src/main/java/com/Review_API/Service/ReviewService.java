@@ -53,17 +53,21 @@ public class ReviewService {
         int counter = reviews.size();
         double currentWorkload = 0.0;
         double currentRating = 0.0;
+        double currentDifficulty = 0.0;
 
         for (Review r : reviews) {
             currentWorkload += r.getWorkload();
             currentRating += r.getRating();
+            currentDifficulty += r.getDifficulty();
         }
 
         double avgWorkload = currentWorkload / counter;
         double avgRating = currentRating / counter;
+        double avgDifficulty = currentDifficulty / counter;
 
         course.setAvgWorkload(avgWorkload);
         course.setRating(avgRating);
+        course.setDifficulty(avgDifficulty);
         courseRepository.save(course);
     }
     public List<Review> getReviewsById(String id) {
