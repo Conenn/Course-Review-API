@@ -18,9 +18,9 @@ public class Review {
     @NotNull(message = "Course Must Be Selected")
     private String courseId;
 
+    @Column(columnDefinition="COLUMN_TYPE default '0'")
     @DecimalMax(value = "5", message = "Difficulty Can't Be Greater Than 5")
     @DecimalMin(value = "1", message = "Difficulty Can't Be Less Than 1")
-    @Column(name = "difficulty")
     private double difficulty;
 
     @DecimalMax(value = "5", message = "Rating Can't Be Greater Than 5")
@@ -37,10 +37,11 @@ public class Review {
 
     private LocalDate createdDate;
 
-    public Review(String comment, String courseId, double rating, double workload){
+    public Review(String comment, String courseId, double difficulty, double rating, double workload){
         this.comment = comment;
         this.courseId = courseId;
         this.rating = rating;
+        this.difficulty = difficulty;
         this.workload = workload;
     }
 
