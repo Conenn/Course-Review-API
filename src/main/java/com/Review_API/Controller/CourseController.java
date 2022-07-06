@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
-@RestController
+@RestController @RequestMapping("/api")
 public class CourseController {
     private final CourseService courseService;
     @Autowired

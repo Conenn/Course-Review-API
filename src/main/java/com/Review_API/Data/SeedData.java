@@ -1,10 +1,16 @@
 package com.Review_API.Data;
 
 import com.Review_API.ErrorHandling.CourseNotFoundException;
+import com.Review_API.Model.AppUser;
 import com.Review_API.Model.Course;
 import com.Review_API.Model.Review;
+import com.Review_API.Model.Role;
 import com.Review_API.Repository.CourseRepository;
 import com.Review_API.Repository.ReviewRepository;
+import com.Review_API.Repository.RoleRepository;
+import com.Review_API.Repository.UserRepository;
+import com.Review_API.Service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.slf4j.Logger;
@@ -12,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,19 +27,26 @@ import java.util.List;
 
 /** Add WGU Computer Science courses to database upon initialization of application. */
 @Order(1)
-@Component
+@Component @RequiredArgsConstructor
 public class SeedData implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(SeedData.class);
 
     private final CourseRepository courseRepository;
-
-    @Autowired
-    public SeedData(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserService userService;
 
     @Override
     public void run(String...args) {
+        AppUser appUser = new AppUser(1, "Sean", "user", "1234", "Sda13@gmail.com", new ArrayList<>());
+        appUser.setPassword(new BCryptPasswordEncoder().encode(appUser.getPassword()));
+        userRepository.save(appUser);
+
+        roleRepository.save(new Role(null, "ROLE_USER"));
+        roleRepository.save(new Role(null, "ROLE_ADMIN"));
+        userService.addRoleToUser("user", "ROLE_ADMIN");
+        userService.addRoleToUser("user", "ROLE_USER");
+
         log.info("Loading " + courseRepository.save(new Course("C482", "Software 1", 0, 0, 0, "WGU CORE")));
         log.info("Loading " + courseRepository.save(new Course("C195", "Software 2", 0, 0, 0, "WGU CORE")));
         log.info("Loading " + courseRepository.save(new Course("C959", "Discrete Mathematics 1", 0, 0, 0,  "WGU GenEd")));

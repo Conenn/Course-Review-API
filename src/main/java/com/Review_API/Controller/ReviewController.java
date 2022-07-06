@@ -12,6 +12,7 @@ import java.util.List;
 @CrossOrigin
 @Validated
 @RestController
+@RequestMapping("/api")
 public class ReviewController {
     private final ReviewService reviewService;
 
@@ -30,7 +31,7 @@ public class ReviewController {
         return reviewService.getReviewsById(id);
     }
 
-    @PostMapping("/reviews")
+    @PostMapping("/post/reviews")
     void newReview(@Valid @RequestBody Review review) {
         String id = review.getCourseId();
         reviewService.addReview(review);

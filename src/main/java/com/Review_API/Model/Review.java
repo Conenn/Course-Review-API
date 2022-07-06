@@ -26,8 +26,8 @@ public class Review {
     @DecimalMin(value = "1", message = "Rating Can't Be Less Than 1")
     private double rating;
 
-    @DecimalMax(value = "60", message = "Workload Can't Be Greater than 60")
-    @DecimalMin(value = "1", message = "Workload Can't Be Less Than 0")
+    @DecimalMax(value = "200", message = "Time to Complete Can't Be Greater than 200")
+    @DecimalMin(value = "1", message = "Time to Complete Can't Be Less Than 0")
     private double workload;
 
     @NotEmpty(message = "Comment Required")
