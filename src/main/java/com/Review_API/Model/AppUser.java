@@ -3,6 +3,8 @@ package com.Review_API.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.ComponentScan;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,10 +12,10 @@ import java.util.Collection;
 
 @Entity @NoArgsConstructor @AllArgsConstructor @Data
 public class AppUser {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
-    private String name;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
+    private long id;
 
     private String username;
 

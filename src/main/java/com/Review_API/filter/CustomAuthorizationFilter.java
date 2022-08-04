@@ -54,7 +54,6 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     log.error("Error logging in: {}", exception.getMessage());
                     response.setHeader("Error", exception.getMessage());
                     response.setStatus(FORBIDDEN.value());
-                    //response.sendError(FORBIDDEN.value());
 
                     Map<String, String> error = new HashMap<>();
                     error.put("error_message", exception.getMessage());

@@ -95,7 +95,6 @@ public class UserController {
     }
 
 }
-
 @Data
 class RoleToUserForm {
     private String username;

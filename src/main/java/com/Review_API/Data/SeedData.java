@@ -30,7 +30,6 @@ import java.util.List;
 @Component @RequiredArgsConstructor
 public class SeedData implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(SeedData.class);
-
     private final CourseRepository courseRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -38,15 +37,6 @@ public class SeedData implements CommandLineRunner {
 
     @Override
     public void run(String...args) {
-        AppUser appUser = new AppUser(1, "Sean", "user", "1234", "Sda13@gmail.com", new ArrayList<>());
-        appUser.setPassword(new BCryptPasswordEncoder().encode(appUser.getPassword()));
-        userRepository.save(appUser);
-
-        roleRepository.save(new Role(null, "ROLE_USER"));
-        roleRepository.save(new Role(null, "ROLE_ADMIN"));
-        userService.addRoleToUser("user", "ROLE_ADMIN");
-        userService.addRoleToUser("user", "ROLE_USER");
-
         log.info("Loading " + courseRepository.save(new Course("C482", "Software 1", 0, 0, 0, "WGU CORE")));
         log.info("Loading " + courseRepository.save(new Course("C195", "Software 2", 0, 0, 0, "WGU CORE")));
         log.info("Loading " + courseRepository.save(new Course("C959", "Discrete Mathematics 1", 0, 0, 0,  "WGU GenEd")));
