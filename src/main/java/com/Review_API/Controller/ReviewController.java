@@ -3,6 +3,7 @@ package com.Review_API.Controller;
 import com.Review_API.Model.Review;
 import com.Review_API.Service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class ReviewController {
     }
 
     @PostMapping("/post/reviews")
-    void newReview(@Valid @RequestBody Review review) {
+    void newReview(@AuthenticationPrincipal @Valid @RequestBody Review review) {
         String id = review.getCourseId();
         reviewService.addReview(review);
         reviewService.calculateAverage(id);

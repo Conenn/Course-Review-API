@@ -14,6 +14,8 @@ public class Review {
     @GeneratedValue
     private Long id;
 
+    @NotNull
+    private String email;
     @NotEmpty(message = "Course Must Be Selected")
     @NotNull(message = "Course Must Be Selected")
     private String courseId;
@@ -36,12 +38,13 @@ public class Review {
 
     private LocalDate createdDate;
 
-    public Review(String comment, String courseId, double difficulty, double rating, double workload){
+    public Review(String email, String comment, String courseId, double difficulty, double rating, double workload){
         this.comment = comment;
         this.courseId = courseId;
         this.rating = rating;
         this.difficulty = difficulty;
         this.workload = workload;
+        this.email = email;
     }
 
     public Review() {

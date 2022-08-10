@@ -48,6 +48,7 @@ build/
 .idea/**/dictionaries
 .idea/**/shelf
 
+
 # AWS User-specific
 .idea/**/aws.xml
 
@@ -174,3 +175,5 @@ hs_err_pid*
 replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij
+/src/main/resources/firebase_config.json
+/src/main/resources/application.yml

@@ -67,6 +67,16 @@
 			<artifactId>java-jwt</artifactId>
 			<version>4.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>6.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.3</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
