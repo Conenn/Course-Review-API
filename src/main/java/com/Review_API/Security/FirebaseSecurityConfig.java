@@ -3,6 +3,7 @@ package com.Review_API.Security;
 import com.Review_API.Properties.SecurityProperties;
 import com.Review_API.filter.SecurityFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,17 +26,14 @@ import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
+@NoArgsConstructor
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+
     ObjectMapper objectMapper;
-
-    @Autowired
     SecurityProperties restSecProps;
-
-    @Autowired
-    public SecurityFilter tokenAuthenticationFilter;
+    SecurityFilter tokenAuthenticationFilter;
 
     @Bean
     public AuthenticationEntryPoint restAuthenticationEntryPoint() {
@@ -72,7 +70,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
-                .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
