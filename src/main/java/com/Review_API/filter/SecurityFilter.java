@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -30,6 +31,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     private final CookieUtils cookieUtils;
     private final SecurityProperties securityProps;
 
+    @Autowired
     public SecurityFilter(SecurityService securityService, CookieUtils cookieUtils, SecurityProperties securityProps) {
         this.securityService = securityService;
         this.cookieUtils = cookieUtils;

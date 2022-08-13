@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @SpringBootApplication
 @EnableConfigurationProperties
 @Slf4j
-@EntityScan(basePackageClasses = com.Review_API.Model.Course.class)  // force scan JPA entities
+@EntityScan  // force scan JPA entities
 public class Main {
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);

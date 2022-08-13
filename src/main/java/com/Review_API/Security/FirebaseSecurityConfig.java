@@ -3,6 +3,8 @@ package com.Review_API.Security;
 import com.Review_API.Properties.SecurityProperties;
 import com.Review_API.filter.SecurityFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -28,6 +31,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SecurityProperties restSecProps;
     private final SecurityFilter tokenAuthenticationFilter;
 
+    @Autowired
     public FirebaseSecurityConfig(SecurityProperties restSecProps, SecurityFilter tokenAuthenticationFilter) {
         this.restSecProps = restSecProps;
         this.tokenAuthenticationFilter = tokenAuthenticationFilter;
@@ -68,6 +72,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
+                .addFilterAfter(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }
