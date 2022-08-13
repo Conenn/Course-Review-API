@@ -3,7 +3,6 @@ package com.Review_API.Security;
 import com.Review_API.Properties.SecurityProperties;
 import com.Review_API.filter.SecurityFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +35,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
     SecurityProperties restSecProps;
 
     @Autowired
-    public SecurityFilter tokenAuthenticationFilter;
+    public SecurityFilter tokenAuthenticationFilter = new SecurityFilter();
 
     @Bean
     public AuthenticationEntryPoint restAuthenticationEntryPoint() {
@@ -73,7 +72,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
-                .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new SecurityFilter(), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }
