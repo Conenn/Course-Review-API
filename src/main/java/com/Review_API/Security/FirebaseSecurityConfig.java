@@ -3,7 +3,6 @@ package com.Review_API.Security;
 import com.Review_API.Properties.SecurityProperties;
 import com.Review_API.filter.SecurityFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -27,14 +25,13 @@ import java.util.Map;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    ObjectMapper objectMapper;
+    private final SecurityProperties restSecProps;
+    private final SecurityFilter tokenAuthenticationFilter;
 
-    @Autowired
-    SecurityProperties restSecProps;
-
-    @Autowired
-    public SecurityFilter tokenAuthenticationFilter;
+    public FirebaseSecurityConfig(SecurityProperties restSecProps, SecurityFilter tokenAuthenticationFilter) {
+        this.restSecProps = restSecProps;
+        this.tokenAuthenticationFilter = tokenAuthenticationFilter;
+    }
 
     @Bean
     public AuthenticationEntryPoint restAuthenticationEntryPoint() {
@@ -47,7 +44,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
             errorObject.put("timestamp", new Timestamp(new Date().getTime()));
             httpServletResponse.setContentType("application/json;charset=UTF-8");
             httpServletResponse.setStatus(errorCode);
-            httpServletResponse.getWriter().write(objectMapper.writeValueAsString(errorObject));
+            //httpServletResponse.getWriter().write(objectMapper.writeValueAsString(errorObject));
         };
     }
 

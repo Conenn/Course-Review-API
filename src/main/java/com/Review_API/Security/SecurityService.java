@@ -3,8 +3,6 @@ package com.Review_API.Security;
 import com.Review_API.Properties.Credentials;
 import com.Review_API.Properties.SecurityProperties;
 import com.Review_API.Model.User;
-import com.Review_API.Utils.CookieUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -16,14 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class SecurityService {
 
-    @Autowired
-    HttpServletRequest httpServletRequest;
 
-    @Autowired
-    CookieUtils cookieUtils;
+    private final HttpServletRequest httpServletRequest;
+    private final SecurityProperties securityProps;
 
-    @Autowired
-    SecurityProperties securityProps;
+    public SecurityService(HttpServletRequest httpServletRequest, SecurityProperties securityProps) {
+        this.httpServletRequest = httpServletRequest;
+        this.securityProps = securityProps;
+    }
 
     public User getUser() {
         User userPrincipal = null;

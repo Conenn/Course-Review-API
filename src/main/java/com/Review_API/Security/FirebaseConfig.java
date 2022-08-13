@@ -4,12 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.google.api.client.util.Value;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -17,11 +17,8 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class FirebaseConfig {
 
-    private final String firebaseCredentials;
-
-    public FirebaseConfig(@Value("${SERVICE_ACCOUNT}") String firebaseCredentials) {
-        this.firebaseCredentials = firebaseCredentials;
-    }
+    @Value("${GOOGLE_CREDENTIALS}")
+    private String firebaseCredentials;
 
     @Primary
     @Bean
