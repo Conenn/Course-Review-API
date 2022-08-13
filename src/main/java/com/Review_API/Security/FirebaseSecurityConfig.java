@@ -70,6 +70,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().configurationSource(corsConfigurationSource()).and().csrf().disable().formLogin().disable()
                 .httpBasic().disable().exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint())
                 .and().authorizeRequests()
+                .antMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
                 .addFilterAfter(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
