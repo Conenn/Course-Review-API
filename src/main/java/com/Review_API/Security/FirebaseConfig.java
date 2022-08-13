@@ -57,6 +57,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,6 +68,7 @@ public class FirebaseConfig {
 
     private final String firebaseCredentials;
 
+    @Autowired
     public FirebaseConfig(@Value("${GOOGLE_CREDENTIALS}") String firebaseCredentials) {
         this.firebaseCredentials = firebaseCredentials;
     }
