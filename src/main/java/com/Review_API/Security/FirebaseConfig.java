@@ -65,7 +65,6 @@ import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class FirebaseConfig {
-
     private final String firebaseCredentials;
 
     @Autowired

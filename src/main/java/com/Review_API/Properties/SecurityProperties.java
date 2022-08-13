@@ -5,11 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
-@Component
+@Component @Data
 @ConfigurationProperties("security")
-@Data
 public class SecurityProperties {
-
     CookieProperties cookieProps;
     FirebaseProperties firebaseProps;
     boolean allowCredentials;
@@ -18,5 +16,4 @@ public class SecurityProperties {
     List<String> exposedHeaders;
     List<String> allowedMethods;
     List<String> allowedPublicApis;
-
 }
