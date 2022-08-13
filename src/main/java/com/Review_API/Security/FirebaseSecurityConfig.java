@@ -27,12 +27,12 @@ import java.util.Map;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Value("${security}")
+
     private final SecurityProperties restSecProps;
     private final SecurityFilter tokenAuthenticationFilter;
 
     @Autowired
-    public FirebaseSecurityConfig(SecurityProperties restSecProps, SecurityFilter tokenAuthenticationFilter) {
+    public FirebaseSecurityConfig(@Value("${security}") SecurityProperties restSecProps, SecurityFilter tokenAuthenticationFilter) {
         this.restSecProps = restSecProps;
         this.tokenAuthenticationFilter = tokenAuthenticationFilter;
     }
