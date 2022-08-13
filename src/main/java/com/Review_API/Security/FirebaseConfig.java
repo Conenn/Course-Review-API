@@ -39,5 +39,4 @@ public class FirebaseConfig {
     public FirebaseAuth firebaseAuth() throws IOException {
         return FirebaseAuth.getInstance(firebaseApp());
     }
-
 }
