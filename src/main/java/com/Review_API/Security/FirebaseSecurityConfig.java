@@ -3,6 +3,7 @@ package com.Review_API.Security;
 import com.Review_API.Properties.SecurityProperties;
 import com.Review_API.filter.SecurityFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -26,6 +27,7 @@ import java.util.Map;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Value("${security}")
     private final SecurityProperties restSecProps;
     private final SecurityFilter tokenAuthenticationFilter;
 
