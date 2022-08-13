@@ -27,7 +27,6 @@ import java.util.Map;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Autowired
     ObjectMapper objectMapper;
 
@@ -35,7 +34,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
     SecurityProperties restSecProps;
 
     @Autowired
-    public SecurityFilter tokenAuthenticationFilter = new SecurityFilter();
+    public SecurityFilter tokenAuthenticationFilter;
 
     @Bean
     public AuthenticationEntryPoint restAuthenticationEntryPoint() {
@@ -72,7 +71,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers(restSecProps.getAllowedPublicApis().toArray(String[]::new)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and()
-                .addFilterBefore(new SecurityFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }
