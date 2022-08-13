@@ -37,19 +37,19 @@ public class SeedData implements CommandLineRunner {
             throw new RuntimeException(e);
         }
 
-        // Read in all transfer courses from degree tracker found in WGU discord channel
-        try (CSVReader transferReader = new CSVReader(new FileReader("src/main/resources/WGU Degree Tracker - Blank.xlsx - Transfer Data.csv"))) {
-            String[] LineInArray;
-            int line = 0; // Track current line to skip white lines
-            while ((LineInArray = transferReader.readNext()) != null && line < 957) {
-                if (line >= 1 && line <= 955) {
-                    log.info("Loading " + courseRepository.save(new Course(LineInArray[0], LineInArray[1], LineInArray[2], 0, 0, 0, LineInArray[3])));
-                }
-                line++;
-            }
-        } catch (CsvValidationException e) {
-            throw new RuntimeException(e);
-        }
+//        // Read in all transfer courses from degree tracker found in WGU discord channel
+//        try (CSVReader transferReader = new CSVReader(new FileReader("src/main/resources/WGU Degree Tracker - Blank.xlsx - Transfer Data.csv"))) {
+//            String[] LineInArray;
+//            int line = 0; // Track current line to skip white lines
+//            while ((LineInArray = transferReader.readNext()) != null && line < 957) {
+//                if (line >= 1 && line <= 955) {
+//                    log.info("Loading " + courseRepository.save(new Course(LineInArray[0], LineInArray[1], LineInArray[2], 0, 0, 0, LineInArray[3])));
+//                }
+//                line++;
+//            }
+//        } catch (CsvValidationException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     @Override

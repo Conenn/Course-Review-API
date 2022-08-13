@@ -34,10 +34,9 @@ public class ReviewService {
             throw new CourseNotFoundException(review.getCourseId());
         }
 
-        //Add date of creation to review object
+        //Add date of creation to review
         LocalDate date = LocalDate.now();
         review.setCreatedDate(date);
-
         reviewRepository.save(review);
     }
 
