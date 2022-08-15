@@ -2,8 +2,8 @@ package com.Review_API.Security;
 
 import com.Review_API.Properties.SecurityProperties;
 import com.Review_API.filter.SecurityFilter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -32,7 +32,7 @@ public class FirebaseSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SecurityFilter tokenAuthenticationFilter;
 
     @Autowired
-    public FirebaseSecurityConfig(@Value("${security}") SecurityProperties restSecProps, SecurityFilter tokenAuthenticationFilter) {
+    public FirebaseSecurityConfig(SecurityProperties restSecProps, SecurityFilter tokenAuthenticationFilter) {
         this.restSecProps = restSecProps;
         this.tokenAuthenticationFilter = tokenAuthenticationFilter;
     }
