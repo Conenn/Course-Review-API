@@ -176,4 +176,4 @@ replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij
 /src/main/resources/firebase_config.json
-/src/main/resources/application.yml
+
