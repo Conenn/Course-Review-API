@@ -23,6 +23,7 @@ security:
   allowed-origins:
     - https://${DOMAIN}
     - http://localhost:3000
+    - https://wgureviews.com
   allowed-methods:
     - GET
     - POST
