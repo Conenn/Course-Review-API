@@ -10,9 +10,6 @@ import java.util.List;
 @Entity
 public class Course {
     @Id
-    @GeneratedValue
-    private Long db_id;
-
     private String id;
 
     private String name;
